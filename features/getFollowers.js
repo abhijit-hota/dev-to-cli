@@ -24,6 +24,4 @@ async function getFollowers() {
   }
 }
 
-getFollowers();
-
-exports.getFollowers = getFollowers;
+module.exports = getFollowers;
