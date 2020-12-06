@@ -1,5 +1,5 @@
 const { Command } = require('commander');
-const postArticle = require('./postArticle');
+const postArticle = require('./features/postArticle');
 
 const program = new Command();
 

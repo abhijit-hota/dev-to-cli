@@ -2,7 +2,10 @@
   "name": "dev-to-cli",
   "version": "0.0.1",
   "description": "Unofficial CLI for Dev.to",
-  "main": "index.js",
+  "main": "devto.js",
+  "bin": {
+    "devto": "devto.js"
+  },
   "scripts": {
     "lint:check": "eslint .",
     "lint:fix": "eslint . --fix",

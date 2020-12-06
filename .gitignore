@@ -1,7 +1,6 @@
 node_modules
 
 # experimental
-questions.js
 
 # dev
 .env

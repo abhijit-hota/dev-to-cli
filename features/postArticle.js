@@ -3,7 +3,7 @@ const ora = require('ora');
 const chalk = require('chalk');
 const matter = require('gray-matter');
 const inquirer = require('inquirer');
-const { articleFrontMatter: questions } = require('./questions');
+const { articleFrontMatter: questions } = require('../utils/questions');
 
 const frontMatterFields = [
   'title',
@@ -62,7 +62,7 @@ async function parseArticleDetails(pathToMarkdownFile) {
 
 async function postArticle(pathToMarkdownFile) {
   // eslint-disable-next-line global-require
-  const { axios } = await require('./axios');
+  const { axios } = await require('../utils/axios');
   const article = await parseArticleDetails(pathToMarkdownFile);
   const spinner = ora('Posting your article...').start();
   try {

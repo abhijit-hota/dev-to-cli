@@ -3,7 +3,7 @@ const chalk = require('chalk');
 
 async function getFollowers() {
   // eslint-disable-next-line global-require
-  const { axios } = await require('./axios');
+  const { axios } = await require('../utils/axios');
   const spinner = ora(chalk.cyan('Fetching your followers').toString()).start();
   try {
     const res = await axios.get('followers/users');
