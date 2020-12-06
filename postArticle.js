@@ -29,27 +29,41 @@ async function getMissingFrontMatter(notProvided) {
   return missingFrontMatter;
 }
 
-async function parseArticleDetails() {
-  const parsed = matter.read('post.md');
-  const { data, content } = parsed;
-  const frontMatter = { ...data, tags: data.tags.split(',') };
-  const notProvided = frontMatterFields.filter(
-    (field) => !parsed.data.hasOwnProperty(field)
-  );
-  const missingFrontMatter = await getMissingFrontMatter(notProvided);
+// eslint-disable-next-line consistent-return
+async function parseArticleDetails(pathToMarkdownFile) {
+  try {
+    if (pathToMarkdownFile.split('.').pop() !== 'md') {
+      const NO_MD_FILE_ERROR = new Error('Please choose a Markdown file.');
+      throw NO_MD_FILE_ERROR;
+    }
+    const parsed = matter.read(pathToMarkdownFile);
+    const { data, content } = parsed;
+    const frontMatter = { ...data, tags: data.tags.split(',') };
+    const notProvided = frontMatterFields.filter(
+      (field) => !parsed.data.hasOwnProperty(field)
+    );
+    const missingFrontMatter = await getMissingFrontMatter(notProvided);
 
-  const article = {
-    ...frontMatter,
-    ...missingFrontMatter,
-    body_markdown: content,
-  };
-  return article;
+    const article = {
+      ...frontMatter,
+      ...missingFrontMatter,
+      body_markdown: content,
+    };
+    return article;
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      console.log(chalk.red('No such file found. Please retry with a proper Markdown file.'));
+      process.exit();
+    }
+    console.log(chalk.red(error.message));
+    process.exit();
+  }
 }
 
-async function postArticle() {
+async function postArticle(pathToMarkdownFile) {
   // eslint-disable-next-line global-require
   const { axios } = await require('./axios');
-  const article = await parseArticleDetails();
+  const article = await parseArticleDetails(pathToMarkdownFile);
   const spinner = ora('Posting your article...').start();
   try {
     const res = await axios.post('/articles', { article });
@@ -66,4 +80,4 @@ async function postArticle() {
   return null;
 }
 
-postArticle();
+module.exports = postArticle;
