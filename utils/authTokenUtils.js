@@ -4,7 +4,7 @@ const fs = require('fs').promises;
 const { default: axios } = require('axios');
 
 async function saveAuthToken(answers) {
-  await fs.writeFile('config.json', JSON.stringify(answers));
+  await fs.writeFile(`${__dirname}/../config.json`, JSON.stringify(answers));
   console.log(chalk.green('✅ Saved Auth Token'));
 
   return true;
