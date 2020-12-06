@@ -9,6 +9,14 @@
   },
   "rules": {
     "no-tabs": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "comma-dangle": [
+      "warn",
+      {
+        "functions": "never",
+        "objects": "always-multiline",
+        "arrays": "always-multiline"
+      }
+    ]
   }
 }

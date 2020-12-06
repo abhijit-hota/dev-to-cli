@@ -1,0 +1,69 @@
+/* eslint-disable no-prototype-builtins */
+const ora = require('ora');
+const chalk = require('chalk');
+const matter = require('gray-matter');
+const inquirer = require('inquirer');
+const { articleFrontMatter: questions } = require('./questions');
+
+const frontMatterFields = [
+  'title',
+  'published',
+  'description',
+  'tags',
+  'canonical_url',
+  'cover_image',
+  'series',
+];
+
+async function getMissingFrontMatter(notProvided) {
+  const nothingIncluded = notProvided.length === frontMatterFields.length;
+  const msg = nothingIncluded
+    ? 'No front matter could be found in the file'
+    : 'Some fields are missing from the front matter';
+  console.log(chalk.yellow(`${msg}. Please add them: `));
+  console.log(chalk.yellow('[*: required, ?: optional]'));
+
+  const missingFrontMatter = await inquirer.prompt([
+    ...questions.filter((question) => notProvided.includes(question.name)),
+  ]);
+  return missingFrontMatter;
+}
+
+async function parseArticleDetails() {
+  const parsed = matter.read('post.md');
+  const { data, content } = parsed;
+  const frontMatter = { ...data, tags: data.tags.split(',') };
+  const notProvided = frontMatterFields.filter(
+    (field) => !parsed.data.hasOwnProperty(field)
+  );
+  const missingFrontMatter = await getMissingFrontMatter(notProvided);
+
+  const article = {
+    ...frontMatter,
+    ...missingFrontMatter,
+    body_markdown: content,
+  };
+  return article;
+}
+
+async function postArticle() {
+  // eslint-disable-next-line global-require
+  const { axios } = await require('./axios');
+  const article = await parseArticleDetails();
+  const spinner = ora('Posting your article...').start();
+  try {
+    const res = await axios.post('/articles', { article });
+    spinner.succeed(
+      chalk.green(
+        `📝 Successfully posted your article at ${chalk.underline(
+          res.data.url
+        )}`
+      )
+    );
+  } catch (error) {
+    spinner.fail(chalk.red(error?.response?.data?.error).toString());
+  }
+  return null;
+}
+
+postArticle();

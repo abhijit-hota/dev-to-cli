@@ -5,6 +5,8 @@ questions.js
 
 # dev
 .env
+post.md
+*.jpg
 
 # output
 config.json
