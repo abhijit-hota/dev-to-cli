@@ -1,5 +1,6 @@
 const ora = require('ora');
 const chalk = require('chalk');
+const link = require('terminal-link');
 
 async function getFollowers() {
   // eslint-disable-next-line global-require
@@ -10,10 +11,10 @@ async function getFollowers() {
     const followers = res.data;
     spinner.stop();
 
-    console.log(chalk.cyan('Your Followers:'));
+    console.log(chalk.cyan(`Your ${followers.length} Followers:`));
 
     const outputList = followers
-      .map((follower) => `• ${follower.name}`)
+      .map((follower) => `• ${link(follower.name, `https://dev.to${follower.path}`)}`)
       .join('\n');
     console.log(outputList);
   } catch (error) {

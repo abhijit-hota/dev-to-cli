@@ -6,6 +6,7 @@ dependencies:
   inquirer: 7.3.3
   markdown-it: 12.0.2
   ora: 5.1.0
+  terminal-link: 2.1.1
 devDependencies:
   eslint: 7.2.0
   eslint-config-airbnb-base: 14.2.1_69c7e0383db3ed4f33dfe68be434a810
@@ -1405,6 +1406,15 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
+  /supports-hyperlinks/2.1.0:
+    dependencies:
+      has-flag: 4.0.0
+      supports-color: 7.2.0
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-zoE5/e+dnEijk6ASB6/qrK+oYdm2do1hjoLWrqUC/8WEIW1gbxFcKuBof7sW8ArN6e+AYvsE8HBGiVRWL/F5CA==
   /table/5.4.6:
     dependencies:
       ajv: 6.12.6
@@ -1416,6 +1426,15 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-wmEc8m4fjnob4gt5riFRtTu/6+4rSe12TpAELNSqHMfF3IqnA+CH37USM6/YR3qRZv7e56kAEAtd6nKZaxe0Ug==
+  /terminal-link/2.1.1:
+    dependencies:
+      ansi-escapes: 4.3.1
+      supports-hyperlinks: 2.1.0
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-un0FmiRUQNr5PJqy9kP7c40F5BOfpGlYTrxonDChEZB7pzZxRNp/bt+ymiy9/npwXya9KH99nJ/GXFIiUkYGFQ==
   /text-table/0.2.0:
     dev: true
     resolution:
@@ -1530,3 +1549,4 @@ specifiers:
   inquirer: 7.3.3
   markdown-it: 12.0.2
   ora: 5.1.0
+  terminal-link: 2.1.1
