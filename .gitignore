@@ -7,6 +7,7 @@ client
 .env
 post.md
 *.jpg
+.http
 
 # output
 config.json
