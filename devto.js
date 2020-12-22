@@ -20,7 +20,7 @@ followers
   .option('-n, --num-users <num>', 'Number of users to display', 20)
   .action(getFollowers);
 
-// Articles features
+// Article features
 const articles = program
   .command('articles')
   .description('Get articles or Post an article.');
