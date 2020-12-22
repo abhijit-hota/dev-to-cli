@@ -13,8 +13,9 @@
 - [ ] Get and cache user info
 - [ ] Read articles in terminal
 - [ ] Get podcast episodes
-- [ ] Use OAtuh to authorize 
-- [ ] More coming soon
+- [ ] Use OAuth to authorize 
+- [ ] Tests?
+- [ ] More consistent commands
 
 ## Usage 
 
