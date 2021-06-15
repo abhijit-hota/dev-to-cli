@@ -15,12 +15,11 @@
 - [ ] Get podcast episodes
 - [ ] Use OAuth to authorize 
 - [ ] Tests?
-- [ ] More consistent commands
+- [ ] Consistent API
 
 ## Usage 
 
-This project is using `pnpm` at the moment. 
-- Install it using: `pnpm install`
+- Install it using: `yarn`
 - Get your Dev.to API Key from [here](https://dev.to/settings/account) 
 - `node devto.js` will show you all the commands to get started.
 

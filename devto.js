@@ -29,7 +29,7 @@ const articles = program
 articles
   .command('create')
   .description('Create a draft or publish an article from a markdown file')
-  .option('-f, --input-file <file>', 'Post a Markdown file as an article')
+  .requiredOption('-f, --input-file <file>', 'The markdown file which is the post [required]')
   .action(function post() {
     postArticle(this.inputFile);
   });

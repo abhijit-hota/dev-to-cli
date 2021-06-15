@@ -8,6 +8,7 @@ client
 post.md
 *.jpg
 .http
+.vscode
 
 # output
 config.json
